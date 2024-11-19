@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>CRUD App</h1>
+  <button onclick="createRecord()">Create</button>
+  <button onclick="showTable()">Show Table</button>
+  <button onclick="updateRecord()">Update</button>
+  <button onclick="deleteRecord()">Delete</button>
+  <div id="result"></div>
+
+  <script>
+    async function createRecord() {
+      const response = await fetch('/api/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'John Doe', email: 'john@example.com' })
+      });
+      const result = await response.json();
+      document.getElementById('result').innerText = JSON.stringify(result);
+    }
+
+    async function showTable() {
+      const response = await fetch('/api/show');
+      const result = await response.json();
+      document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+    }
+
+    async function updateRecord() {
+      const id = prompt('Enter ID to update:');
+      const response = await fetch(`/api/update/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'Updated Name', email: 'updated@example.com' })
+      });
+      const result = await response.json();
+      document.getElementById('result').innerText = JSON.stringify(result);
+    }
+
+    async function deleteRecord() {
+      const id = prompt('Enter ID to delete:');
+      const response = await fetch(`/api/delete/${id}`, { method: 'DELETE' });
+      const result = await response.json();
+      document.getElementById('result').innerText = JSON.stringify(result);
+    }
+  </script>
+</body>
+</html>

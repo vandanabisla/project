@@ -1,0 +1,16 @@
+{
+  "name": "my-expressjs-app",
+  "version": "1.0.0",
+  "description": "My Express JS Application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "Rocking Support",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "mysql": "^2.18.1"
+  }
+}
